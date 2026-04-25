@@ -42,7 +42,7 @@ release:
 	git add pom.xml; \
 	git commit -m "Release $$TAG"; \
 	git tag "$$TAG"; \
-	git push origin HEAD:main; \
 	git push origin "$$TAG"; \
 	gh release create "$$TAG" "$$RELEASE_FAT" "$$RELEASE_THIN" --title "Release $$TAG" --notes ""; \
+	git push origin HEAD:main; \
 	echo "Published GitHub release $$TAG"
