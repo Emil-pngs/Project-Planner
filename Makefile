@@ -44,5 +44,7 @@ release:
 	git tag "$$TAG"; \
 	git push origin "$$TAG"; \
 	gh release create "$$TAG" "$$RELEASE_FAT" "$$RELEASE_THIN" --title "Release $$TAG" --notes ""; \
+	git add .; \
+	git commit -m "Compiled for Release $$TAG"; \
 	git push origin HEAD:main; \
 	echo "Published GitHub release $$TAG"
