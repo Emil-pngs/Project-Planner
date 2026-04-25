@@ -1,12 +1,20 @@
 package dtu.projectplanner.ui;
 
-import java.io.IOException;
-import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class SecondaryController {
 
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    public VBox getView() {
+        Label label = new Label("Secondary View");
+        Button button = new Button("Switch to Primary View");
+        button.setOnAction(e -> App.showPrimary());
+
+        VBox vbox = new VBox(20, label, button);
+        vbox.setAlignment(javafx.geometry.Pos.CENTER);
+        vbox.setPadding(new Insets(20));
+        return vbox;
     }
 }
