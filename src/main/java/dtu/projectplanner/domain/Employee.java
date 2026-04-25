@@ -25,6 +25,15 @@ public class Employee {
         }
     }
 
+    // We keep the entity specific business rules here (Rich Domain Model)
+    public boolean isAvailableFor(Activity activity) {
+        if (isAssignedTo(activity)) return false;
+
+        // We can add more requirements here
+
+        return true;
+    }
+
     public String getName() {
         return name;
     }
