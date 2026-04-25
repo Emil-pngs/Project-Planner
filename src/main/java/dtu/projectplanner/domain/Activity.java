@@ -27,7 +27,7 @@ public class Activity {
         // the activity knows about the employee, and the employee knows about the activity.
         if (!assignedEmployees.contains(employee)) {
             assignedEmployees.add(employee);
-            // We add this activity to the employee's  assigned activities 
+            // We add this activity to the employee's assigned activities 
             // to maintain the bidirectional relationship.
             employee.addAssignedActivity(this);
         }
