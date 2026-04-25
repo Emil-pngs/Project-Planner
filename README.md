@@ -8,7 +8,7 @@ Project planning application for Softwarehuset A/S. It currently supports two ro
 
 ## Requirements
 
-- Java 17 or higher (no separate JavaFX installation needed — it is bundled via Maven)
+- Java 17 or higher
 
 ## How to run the Application
 
