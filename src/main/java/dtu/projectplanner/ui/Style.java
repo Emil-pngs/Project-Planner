@@ -99,9 +99,7 @@ public final class Style {
 
     /** Toggle button for use in coloured top bars. */
     public static Button buildDarkToggle() {
-        Color fg = dark ? Color.web(TEXT_DARK) : Color.web("#FFFFFF", 0.85);
-        String bg = dark ? BG : "rgba(255,255,255,0.15)";
-        return buildToggleBtn(bg, fg);
+        return buildToggleBtn("rgba(255,255,255,0.15)", Color.web("#FFFFFF", 0.85));
     }
 
     /** Toggle button for use on light/neutral backgrounds (e.g. HomeView). */
