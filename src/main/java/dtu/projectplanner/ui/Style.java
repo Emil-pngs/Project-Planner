@@ -3,8 +3,11 @@ package dtu.projectplanner.ui;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.io.InputStream;
 
 public final class Style {
 
@@ -57,19 +60,34 @@ public final class Style {
     public static Font regular(double gridUnits) { return Font.font("System", u(gridUnits)); }
 
     // Dark mode toggle button
-    /** Toggle button for use in coloured top bars. */
-    public static Button buildDarkToggle() {
-        Button btn = new Button(dark ? "\u2600" : "\u263D ");
+    private static String loadSvgPath(String name) {
+        try (InputStream is = Style.class.getResourceAsStream(name)) {
+            if (is == null) return "";
+            String content = new String(is.readAllBytes());
+            int start = content.indexOf("d=\"") + 3;
+            int end = content.indexOf("\"", start);
+            return content.substring(start, end);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private static Button buildToggleBtn(String bg, Color fgColor) {
+        SVGPath icon = new SVGPath();
+        icon.setContent(dark ? loadSvgPath("sun.svg") : loadSvgPath("moon.svg"));
+        icon.setFill(fgColor);
+        double scale = u(1.3) / 24.0;
+        icon.setScaleX(scale);
+        icon.setScaleY(scale);
+
         double sz = u(2.6);
+        Button btn = new Button();
+        btn.setGraphic(icon);
         btn.setPrefSize(sz, sz);
         btn.setMinSize(sz, sz);
         btn.setMaxSize(sz, sz);
-        String bg = dark ? BG : "rgba(255,255,255,0.15)";
-        String fg = dark ? TEXT_DARK : "rgba(255,255,255,0.85)";
         btn.setStyle(
             "-fx-background-color: " + bg + ";" +
-            "-fx-text-fill: " + fg + ";" +
-            "-fx-font-size: " + u(1.6) + "px;" +
             "-fx-background-radius: " + sz + ";" +
             "-fx-cursor: hand;" +
             "-fx-padding: 0;" +
@@ -79,24 +97,16 @@ public final class Style {
         return btn;
     }
 
+    /** Toggle button for use in coloured top bars. */
+    public static Button buildDarkToggle() {
+        Color fg = dark ? Color.web(TEXT_DARK) : Color.web("#FFFFFF", 0.85);
+        String bg = dark ? BG : "rgba(255,255,255,0.15)";
+        return buildToggleBtn(bg, fg);
+    }
+
     /** Toggle button for use on light/neutral backgrounds (e.g. HomeView). */
     public static Button buildDarkToggleLight() {
-        Button btn = new Button(dark ? "\u2600" : "\u263D ");
-        double sz = u(2.6);
-        btn.setPrefSize(sz, sz);
-        btn.setMinSize(sz, sz);
-        btn.setMaxSize(sz, sz);
-        btn.setStyle(
-            "-fx-background-color: " + BG + ";" +
-            "-fx-text-fill: " + TEXT_DARK + ";" +
-            "-fx-font-size: " + u(1.6) + "px;" +
-            "-fx-background-radius: " + sz + ";" +
-            "-fx-cursor: hand;" +
-            "-fx-padding: 0;" +
-            "-fx-alignment: center;"
-        );
-        btn.setOnAction(e -> { toggleDark(); App.refresh(); });
-        return btn;
+        return buildToggleBtn(BG, Color.web(TEXT_DARK));
     }
 
     // Component CSS
@@ -148,8 +158,8 @@ public final class Style {
 
     public static DropShadow cardShadow(String hexColor) {
         DropShadow s = new DropShadow();
-        s.setColor(Color.web(hexColor, 0.2));
-        s.setRadius(28);
+        s.setColor(dark ? Color.web("#FFFFFF", 0.04) : Color.web(hexColor, 0.2));
+        s.setRadius(dark ? 20 : 28);
         s.setOffsetY(8);
         return s;
     }

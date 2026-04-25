@@ -68,7 +68,7 @@ public class HomeView {
         card.setPrefSize(cardW, cardH);
         card.setMaxSize(cardW, cardH);
         card.setPadding(new Insets(h(4), w(2), h(4), w(2)));
-        card.setStyle(Style.card("white"));
+        card.setStyle(Style.card(Style.CARD_BG));
 
         // Shadow lives on a wrapper so it doesn't expand the card's hover bounds
         StackPane wrapper = new StackPane(card);
