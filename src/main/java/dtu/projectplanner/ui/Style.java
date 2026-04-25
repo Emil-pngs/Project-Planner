@@ -8,10 +8,10 @@ import javafx.scene.text.FontWeight;
 
 public final class Style {
 
-    // ── Theme state ────────────────────────────────────────────────────
+    // Theme state
     public static boolean dark = false;
 
-    // ── Colour tokens (mutable; swapped by toggleDark) ────────────────
+    // Colour tokens (mutable; swapped by toggleDark)
     public static String BG           = "#F5F3FF";
     public static String TEXT_DARK    = "#2A2040";
     public static String TEXT_MUTED   = "#6B6080";
@@ -47,16 +47,16 @@ public final class Style {
         EMPLOYEE_CARD_BG = dark ? "#162336" : "white";
     }
 
-    // ── Grid helpers ───────────────────────────────────────────────────
+    // Grid helpers
     public static double w(double u)  { return u * App.cellW; }
     public static double h(double u)  { return u * App.cellH; }
     public static double u(double g)  { return g * (App.cellW + App.cellH) / 2.0; }
 
-    // ── Fonts ──────────────────────────────────────────────────────────
+    // Fonts
     public static Font bold(double gridUnits)    { return Font.font("System", FontWeight.BOLD, u(gridUnits)); }
     public static Font regular(double gridUnits) { return Font.font("System", u(gridUnits)); }
 
-    // ── Dark mode toggle button ────────────────────────────────────────
+    // Dark mode toggle button
     /** Toggle button for use in coloured top bars. */
     public static Button buildDarkToggle() {
         Button btn = new Button(dark ? "\u2600" : "\u263D ");
@@ -99,7 +99,7 @@ public final class Style {
         return btn;
     }
 
-    // ── Component CSS ──────────────────────────────────────────────────
+    // Component CSS
     public static String background() {
         return "-fx-background-color: " + BG + ";";
     }

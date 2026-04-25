@@ -74,7 +74,7 @@ public class ProjectLeaderView {
         BorderPane inner = new BorderPane();
         inner.setStyle(Style.sidebar());
 
-        // ── Inline add row (fixed height, no toggle) ─────────────────
+        // Inline add row (fixed height, no toggle)
         TextField nameField = new TextField();
         nameField.setPromptText("New project name...");
         nameField.setPrefHeight(h(5));
@@ -103,7 +103,7 @@ public class ProjectLeaderView {
                 errorLabel.setManaged(true);
                 return;
             }
-            App.getService().addProject(name);
+            App.getService().createProject(name);
             nameField.clear();
             errorLabel.setVisible(false);
             errorLabel.setManaged(false);
@@ -118,7 +118,7 @@ public class ProjectLeaderView {
         VBox topSection = new VBox(h(0.8), addRow, errorLabel, header);
         topSection.setPadding(new Insets(h(2), w(2), 0, w(2)));
 
-        // ── Scrollable project list ───────────────────────────────────
+        // Scrollable project list
         projectItems = new VBox(h(0.3));
         projectItems.setFillWidth(true);
         refreshProjectItems(projectItems);
@@ -141,7 +141,7 @@ public class ProjectLeaderView {
 
     private void refreshProjectItems(VBox projectItems) {
         projectItems.getChildren().clear();
-        List<Project> projects = App.getService().getProjects();
+        List<Project> projects = App.getProjects();
         if (projects.isEmpty()) {
             Label none = new Label("No projects yet");
             none.setFont(Style.regular(1.0));

@@ -2,14 +2,22 @@ package dtu.projectplanner.ui;
 
 import dtu.projectplanner.app.ProjectPlanningService;
 import dtu.projectplanner.domain.Project;
+import dtu.projectplanner.repository.EmployeeRepository;
+import dtu.projectplanner.repository.ProjectRepository;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class App extends Application {
 
     private static Scene scene;
+    private static ProjectRepository projectRepo = new ProjectRepository();
+    private static EmployeeRepository employeeRepo = new EmployeeRepository();
+    private static ProjectPlanningService service =
+        new ProjectPlanningService(projectRepo, employeeRepo);
 
     /** Width of one grid cell (1/100 of 80% screen width). */
     static double cellW;
@@ -33,7 +41,11 @@ public class App extends Application {
     }
 
     public static ProjectPlanningService getService() {
-        return ProjectPlanningService.getInstance();
+        return service;
+    }
+
+    public static List<Project> getProjects() {
+        return projectRepo.findAll();
     }
 
     private static Runnable currentRefresh;

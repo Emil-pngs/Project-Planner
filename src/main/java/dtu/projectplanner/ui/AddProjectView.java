@@ -97,7 +97,7 @@ public class AddProjectView {
                 errorLabel.setVisible(true);
                 return;
             }
-            App.getService().addProject(name);
+            App.getService().createProject(name);
             App.showProjectLeader();
         });
 

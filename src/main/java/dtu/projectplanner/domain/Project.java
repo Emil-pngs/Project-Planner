@@ -65,4 +65,8 @@ public class Project {
     public int getProjectID() {
         return projectID;
     }
+
+    public String getName() {
+        return name;
+    }
 }
