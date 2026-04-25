@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
-    private int ProjectID;
+    private int projectID;
     private String name;
     private Employee leader;
     private List<Activity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, Employee leader) {
-        this.ProjectID = projectID;
+    public Project(int projectID, String name) {
+        this.projectID = projectID;
         this.name = name;
     }
 
-    public void setProjewtLeader(Employee leader) {
+    public void setProjectLeader(Employee leader) {
         this.leader = leader;
     }
 
@@ -55,5 +55,9 @@ public class Project {
             total += activity.getBudgetedHours() - activity.remainingHours();
         }
         return total;
+    }
+
+    public int getProjectID() {
+        return projectID;
     }
 }
