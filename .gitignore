@@ -10,6 +10,9 @@ nb-configuration.xml
 
 *.class
 
-target/
-!target/*.jar
-!target/shurefire-reports
+target/classes/
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+target/test-classes/
