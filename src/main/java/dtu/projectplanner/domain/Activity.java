@@ -33,6 +33,29 @@ public class Activity {
         }
     }
 
+    public void registerTimeEntry(TimeEntry timeEntry) {
+        timeEntries.add(timeEntry);
+    }
+
+    public int getBudgetedHours() {
+        return budgetedHours;
+    }
+
+    public int remainingHours() {
+        int registeredHours = 0;
+
+        // We sum up all the hours from the time entries to calculate the total registered hours.
+        for (TimeEntry entry : timeEntries) {
+            registeredHours += entry.getHours();
+        }
+
+        return budgetedHours - registeredHours;
+    }
+
+    public int getActivityID() {
+        return activityID;
+    }
+
     public ActivityStatus getStatus() {
         return status;
     }
