@@ -138,12 +138,45 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.5.2</version>
 				<executions>
+					<!-- Thin jar: JavaFX excluded — runs FIRST before fat-jar overwrites the main artifact -->
 					<execution>
+						<id>thin-jar</id>
 						<phase>package</phase>
 						<goals>
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<outputFile>${project.build.directory}/ProjectPlanner-thin.jar</outputFile>
+							<artifactSet>
+								<excludes>
+									<exclude>org.openjfx:*:*:*</exclude>
+									<exclude>org.openjfx:*</exclude>
+								</excludes>
+							</artifactSet>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>dtu.projectplanner.ui.Launcher</mainClass>
+								</transformer>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>module-info.class</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+					<!-- Fat jar: all dependencies including JavaFX bundled -->
+					<execution>
+						<id>fat-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<outputFile>${project.build.directory}/ProjectPlanner.jar</outputFile>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>dtu.projectplanner.ui.Launcher</mainClass>

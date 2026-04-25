@@ -1,12 +1,14 @@
-JAR := target/ProjectPlanner.jar
+FAT_JAR := target/ProjectPlanner.jar
+THIN_JAR := target/ProjectPlanner-thin.jar
 
 .PHONY: build test run clean
 
-# Build the jar and do a quick smoke-run (exits after 3 s if no crash)
+# Build both jars and do a quick smoke-run of the fat jar
 build:
 	mvn package -q
-	@echo "Built $(JAR)"
-	@timeout 3 java -jar $(JAR) || true
+	@echo "Built $(FAT_JAR) (fat jar)"
+	@echo "Built $(THIN_JAR) (thin jar)"
+	@timeout 3 java -jar $(FAT_JAR) || true
 	@echo "Smoke-run passed"
 
 # Run the unit + Cucumber tests

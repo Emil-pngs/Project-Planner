@@ -38,11 +38,42 @@
         <version>3.5.2</version>
         <executions>
           <execution>
+            <id>thin-jar</id>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
             <configuration>
+              <outputFile>${project.build.directory}/ProjectPlanner-thin.jar</outputFile>
+              <artifactSet>
+                <excludes>
+                  <exclude>org.openjfx:*:*:*</exclude>
+                  <exclude>org.openjfx:*</exclude>
+                </excludes>
+              </artifactSet>
+              <transformers>
+                <transformer>
+                  <mainClass>dtu.projectplanner.ui.Launcher</mainClass>
+                </transformer>
+              </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>module-info.class</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+          <execution>
+            <id>fat-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <outputFile>${project.build.directory}/ProjectPlanner.jar</outputFile>
               <transformers>
                 <transformer>
                   <mainClass>dtu.projectplanner.ui.Launcher</mainClass>
