@@ -10,7 +10,7 @@ Project planning application for Softwarehuset A/S. It currently supports two ro
 
 - Java 17 or higher
 
-> Maven and/or Make are only needed if building from source. The prebuilt jar (`target/ProjectPlanner.jar`) requires only Java.
+> Maven and/or Make are only needed if building from source. The prebuilt jar only requires Java.
 
 ## How to run the Application
 
