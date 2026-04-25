@@ -1,5 +1,7 @@
 package dtu.projectplanner.domain;
 
-public class ActivityStatus {
-    
+public enum ActivityStatus {
+    PLANNED,
+    IN_PROGRESS,
+    COMPLETED
 }
