@@ -57,6 +57,11 @@ public class Project {
         return total;
     }
 
+    // In the project class as opposed to the planning service
+    public int getRemainingWork() {
+        return totalBudgetedHours() - totalRegisteredHours();
+    }
+
     public int getProjectID() {
         return projectID;
     }
