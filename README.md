@@ -9,8 +9,10 @@ Project planning application for Softwarehuset A/S. It currently supports two ro
 ## Requirements
 
 - Java 17 or higher
+- (Optionally) GNU make 4.4.1 or higher
+- (Optionally) Apache Maven 3.9.11 or higher
 
-> Maven and/or Make are only needed if building from source. The prebuilt jar only requires Java.
+> Make and/or Maven are only needed if building from source. The prebuilt jar only requires Java.
 
 ## How to run the Application
 
