@@ -1,2 +1,15 @@
-target/maven-status
-target/surefire-reports
+.vscode/
+.idea/
+.eclipse/
+*.launch
+*.classpath
+*.project
+.settings/
+nbproject/
+nb-configuration.xml
+
+*.class
+
+target/
+!target/*.jar
+!target/shurefire-reports
