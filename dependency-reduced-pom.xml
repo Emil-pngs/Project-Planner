@@ -45,7 +45,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>dtu.projectplanner.ui.App</mainClass>
+                  <mainClass>dtu.projectplanner.ui.Launcher</mainClass>
                 </transformer>
               </transformers>
               <filters>
