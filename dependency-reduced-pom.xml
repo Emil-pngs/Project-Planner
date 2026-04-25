@@ -5,6 +5,7 @@
   <artifactId>javaFX_project</artifactId>
   <version>0.0.2</version>
   <build>
+    <finalName>ProjectPlanner</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -1,3 +1,4 @@
 target/maven-status
 target/surefire-reports
 *.jar
+Makefile
