@@ -19,7 +19,7 @@ public class EmployeeView {
 
     public Pane build() {
         BorderPane root = new BorderPane();
-        root.setStyle(Style.background());
+        root.setStyle("-fx-background-color: " + Style.EMPLOYEE_BG + ";");
         root.setPrefSize(w(100), h(100));
         root.setTop(buildTopBar());
         root.setCenter(buildContent());
@@ -50,13 +50,17 @@ public class EmployeeView {
         role.setTextFill(Color.web("#FFFFFF", 0.6));
         role.setStyle(Style.roleTag());
 
-        bar.getChildren().addAll(back, title, spacer, role);
+        Button darkToggle = Style.buildDarkToggle();
+        HBox.setMargin(darkToggle, new Insets(0, 0, 0, Style.w(3)));
+
+        bar.getChildren().addAll(back, title, spacer, role, darkToggle);
         return bar;
     }
 
     private VBox buildContent() {
         VBox content = new VBox(h(3));
         content.setPadding(new Insets(h(4), w(5), h(4), w(5)));
+        content.setStyle("-fx-background-color: " + Style.EMPLOYEE_BG + ";");
 
         Label heading = new Label("My Assigned Activities");
         heading.setFont(Style.bold(1.7));

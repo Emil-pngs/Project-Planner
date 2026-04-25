@@ -50,6 +50,12 @@ public class HomeView {
 
         center.getChildren().addAll(title, subtitle, cards);
         root.getChildren().add(center);
+
+        Button toggle = Style.buildDarkToggleLight();
+        StackPane.setAlignment(toggle, Pos.TOP_RIGHT);
+        StackPane.setMargin(toggle, new Insets(h(2), w(2), 0, 0));
+        root.getChildren().add(toggle);
+
         return root;
     }
 
@@ -99,7 +105,7 @@ public class HomeView {
                 dot.setTextFill(Color.WHITE);
                 btn.setStyle(Style.ghostButton(color, Style.u(1.1)));
             } else {
-                card.setStyle(Style.card("white"));
+                card.setStyle(Style.card(Style.CARD_BG));
                 titleLabel.setTextFill(Color.web(Style.TEXT_DARK));
                 descLabel.setTextFill(Color.web(Style.TEXT_MUTED));
                 dot.setTextFill(Color.web(color));

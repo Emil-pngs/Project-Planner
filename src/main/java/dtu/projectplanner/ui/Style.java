@@ -1,5 +1,6 @@
 package dtu.projectplanner.ui;
 
+import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -7,25 +8,98 @@ import javafx.scene.text.FontWeight;
 
 public final class Style {
 
-    // Colours
-    public static final String BG           = "#F0F4FF";
-    public static final String TEXT_DARK    = "#1A1A2E";
-    public static final String TEXT_MUTED   = "#6B7280";
-    public static final String TEXT_FAINT   = "#E0E0E0";
-    public static final String EMPLOYEE     = "#4361EE";
-    public static final String LEADER       = "#7B2D8B";
+    // ── Theme state ────────────────────────────────────────────────────
+    public static boolean dark = false;
 
-    // Grid helpers (delegate to App cell sizes)
+    // ── Colour tokens (mutable; swapped by toggleDark) ────────────────
+    public static String BG           = "#F5F3FF";
+    public static String TEXT_DARK    = "#2A2040";
+    public static String TEXT_MUTED   = "#6B6080";
+    public static String TEXT_FAINT   = "#DDD8EE";
+    public static String EMPLOYEE     = "#5A7EC0";
+    public static String LEADER       = "#7B5A9E";
+    public static String LEADER_BAR   = "#4E2D72";
+    public static String SIDEBAR_BG   = "#EDE7F6";
+    public static String SIDEBAR_TEXT = "#2E1F45";
+    public static String SIDEBAR_MUTED = "#5C4478";
+    public static String CARD_BG      = "white";
+    public static String DIVIDER      = "#DDD8EE";
+    public static String INPUT_BORDER = "#C9BBD9";
+    public static String EMPLOYEE_BG      = "#F5F3FF";
+    public static String EMPLOYEE_CARD_BG = "white";
+
+    public static void toggleDark() {
+        dark = !dark;
+        BG            = dark ? "#1B1228" : "#F5F3FF";
+        TEXT_DARK     = dark ? "#EDE8FA" : "#2A2040";
+        TEXT_MUTED    = dark ? "#9D8DB8" : "#6B6080";
+        TEXT_FAINT    = dark ? "#3A2C52" : "#DDD8EE";
+        EMPLOYEE      = dark ? "#7A9DD4" : "#5A7EC0";
+        LEADER        = dark ? "#9B6DC0" : "#7B5A9E";
+        LEADER_BAR    = dark ? "#2A1845" : "#4E2D72";
+        SIDEBAR_BG    = dark ? "#241838" : "#EDE7F6";
+        SIDEBAR_TEXT  = dark ? "#D8CCEE" : "#2E1F45";
+        SIDEBAR_MUTED = dark ? "#8870A8" : "#5C4478";
+        CARD_BG       = dark ? "#2D2040" : "white";
+        DIVIDER       = dark ? "#3A2C52" : "#DDD8EE";
+        INPUT_BORDER  = dark ? "#5A4278" : "#C9BBD9";
+        EMPLOYEE_BG      = dark ? "#0D1A2E" : "#F5F3FF";
+        EMPLOYEE_CARD_BG = dark ? "#162336" : "white";
+    }
+
+    // ── Grid helpers ───────────────────────────────────────────────────
     public static double w(double u)  { return u * App.cellW; }
     public static double h(double u)  { return u * App.cellH; }
-    // Uniform scale unit: average of one column-cell and one row-cell
     public static double u(double g)  { return g * (App.cellW + App.cellH) / 2.0; }
 
-    // Fonts
-    public static Font bold(double gridUnits)   { return Font.font("System", FontWeight.BOLD, u(gridUnits)); }
-    public static Font regular(double gridUnits){ return Font.font("System", u(gridUnits)); }
+    // ── Fonts ──────────────────────────────────────────────────────────
+    public static Font bold(double gridUnits)    { return Font.font("System", FontWeight.BOLD, u(gridUnits)); }
+    public static Font regular(double gridUnits) { return Font.font("System", u(gridUnits)); }
 
-    // Inline CSS strings
+    // ── Dark mode toggle button ────────────────────────────────────────
+    /** Toggle button for use in coloured top bars. */
+    public static Button buildDarkToggle() {
+        Button btn = new Button(dark ? "\u2600" : "\u263D ");
+        double sz = u(2.6);
+        btn.setPrefSize(sz, sz);
+        btn.setMinSize(sz, sz);
+        btn.setMaxSize(sz, sz);
+        String bg = dark ? BG : "rgba(255,255,255,0.15)";
+        String fg = dark ? TEXT_DARK : "rgba(255,255,255,0.85)";
+        btn.setStyle(
+            "-fx-background-color: " + bg + ";" +
+            "-fx-text-fill: " + fg + ";" +
+            "-fx-font-size: " + u(1.6) + "px;" +
+            "-fx-background-radius: " + sz + ";" +
+            "-fx-cursor: hand;" +
+            "-fx-padding: 0;" +
+            "-fx-alignment: center;"
+        );
+        btn.setOnAction(e -> { toggleDark(); App.refresh(); });
+        return btn;
+    }
+
+    /** Toggle button for use on light/neutral backgrounds (e.g. HomeView). */
+    public static Button buildDarkToggleLight() {
+        Button btn = new Button(dark ? "\u2600" : "\u263D ");
+        double sz = u(2.6);
+        btn.setPrefSize(sz, sz);
+        btn.setMinSize(sz, sz);
+        btn.setMaxSize(sz, sz);
+        btn.setStyle(
+            "-fx-background-color: " + BG + ";" +
+            "-fx-text-fill: " + TEXT_DARK + ";" +
+            "-fx-font-size: " + u(1.6) + "px;" +
+            "-fx-background-radius: " + sz + ";" +
+            "-fx-cursor: hand;" +
+            "-fx-padding: 0;" +
+            "-fx-alignment: center;"
+        );
+        btn.setOnAction(e -> { toggleDark(); App.refresh(); });
+        return btn;
+    }
+
+    // ── Component CSS ──────────────────────────────────────────────────
     public static String background() {
         return "-fx-background-color: " + BG + ";";
     }
@@ -64,7 +138,7 @@ public final class Style {
     }
 
     public static String ghostButton(String accent, double fontPx) {
-        return "-fx-background-color: white;" +
+        return "-fx-background-color: " + CARD_BG + ";" +
                "-fx-text-fill: " + accent + ";" +
                "-fx-font-size: " + fontPx + "px;" +
                "-fx-font-weight: bold;" +
@@ -72,13 +146,78 @@ public final class Style {
                "-fx-cursor: hand;";
     }
 
-    // Effects
     public static DropShadow cardShadow(String hexColor) {
         DropShadow s = new DropShadow();
         s.setColor(Color.web(hexColor, 0.2));
         s.setRadius(28);
         s.setOffsetY(8);
         return s;
+    }
+
+    public static String sidebar() {
+        return "-fx-background-color: " + SIDEBAR_BG + ";";
+    }
+
+    public static String sidebarTextField(double fontPx) {
+        return "-fx-font-size: " + fontPx + "px;" +
+               "-fx-background-color: " + CARD_BG + ";" +
+               "-fx-background-radius: 6;" +
+               "-fx-text-fill: " + SIDEBAR_TEXT + ";" +
+               "-fx-prompt-text-fill: rgba(100,80,130,0.45);" +
+               "-fx-border-color: " + INPUT_BORDER + ";" +
+               "-fx-border-radius: 6;" +
+               "-fx-padding: 3 8 3 8;";
+    }
+
+    public static String sidebarAddButton(double fontPx) {
+        return "-fx-background-color: " + LEADER + ";" +
+               "-fx-text-fill: white;" +
+               "-fx-font-size: " + fontPx + "px;" +
+               "-fx-font-weight: bold;" +
+               "-fx-background-radius: 6;" +
+               "-fx-cursor: hand;";
+    }
+
+    public static String sidebarProjectRow() {
+        return "-fx-cursor: hand; -fx-background-color: transparent;";
+    }
+
+    public static String sidebarProjectRowSelected() {
+        return dark
+            ? "-fx-background-color: rgba(122,157,212,0.25); -fx-cursor: hand;"
+            : "-fx-background-color: rgba(90,126,192,0.18); -fx-cursor: hand;";
+    }
+
+    public static String sidebarProjectRowHover() {
+        return dark
+            ? "-fx-background-color: rgba(255,255,255,0.08); -fx-cursor: hand;"
+            : "-fx-background-color: rgba(139,107,168,0.12); -fx-cursor: hand;";
+    }
+
+    public static String scrollPaneTransparent() {
+        return "-fx-background: transparent;" +
+               "-fx-background-color: transparent;" +
+               "-fx-border-color: transparent;";
+    }
+
+    public static String projectViewHeader() {
+        return "-fx-border-color: transparent transparent " + DIVIDER + " transparent;" +
+               "-fx-border-width: 0 0 1 0;";
+    }
+
+    public static String inputField(double fontPx) {
+        return "-fx-font-size: " + fontPx + "px;" +
+               "-fx-background-color: " + CARD_BG + ";" +
+               "-fx-background-radius: 8;" +
+               "-fx-text-fill: " + TEXT_DARK + ";" +
+               "-fx-border-color: " + INPUT_BORDER + ";" +
+               "-fx-border-radius: 8;" +
+               "-fx-padding: 6 12 6 12;";
+    }
+
+    public static String idBadge() {
+        return "-fx-background-color: " + SIDEBAR_BG + ";" +
+               "-fx-background-radius: 20;";
     }
 
     private Style() {}

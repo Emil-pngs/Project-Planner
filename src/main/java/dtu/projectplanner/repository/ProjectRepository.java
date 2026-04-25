@@ -1,7 +1,10 @@
 package dtu.projectplanner.repository;
 
 import dtu.projectplanner.domain.Project;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProjectRepository {
@@ -24,5 +27,27 @@ public class ProjectRepository {
         return null;
     }
 
-    
+    public List<Project> findAll() {
+        return Collections.unmodifiableList(projects);
+    }
+
+    /**
+     * Generates the next project ID in the format YY###,
+     * e.g. 26001, 26002, ... 26999.
+     */
+    public int generateNextID() {
+        int year = LocalDate.now().getYear() % 100; // e.g. 26
+        int prefix = year * 1000;                   // e.g. 26000
+        int maxSeq = 0;
+        for (Project p : projects) {
+            if (p.getProjectID() / 1000 == year) {
+                int seq = p.getProjectID() % 1000;
+                if (seq > maxSeq) {
+                    maxSeq = seq;
+                }
+            }
+        }
+        return prefix + maxSeq + 1;
+    }
+
 }
