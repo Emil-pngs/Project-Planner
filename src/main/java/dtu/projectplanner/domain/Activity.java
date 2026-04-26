@@ -56,6 +56,18 @@ public class Activity {
         return activityID;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getStartWeek() {
+        return startWeek;
+    }
+
+    public int getEndWeek() {
+        return endWeek;
+    }
+
     public ActivityStatus getStatus() {
         return status;
     }

@@ -41,4 +41,8 @@ public class Employee {
     public String getInitials() {
         return initials;
     }
+
+    public List<Activity> getAssignedActivities() {
+        return assignedActivities;
+    }
 }

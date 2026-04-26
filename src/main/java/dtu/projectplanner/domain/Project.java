@@ -62,6 +62,10 @@ public class Project {
         return totalBudgetedHours() - totalRegisteredHours();
     }
 
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
     public int getProjectID() {
         return projectID;
     }
