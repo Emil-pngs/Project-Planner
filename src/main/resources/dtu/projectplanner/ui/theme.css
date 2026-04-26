@@ -1,0 +1,189 @@
+.root {
+    -color-bg-root: #f7f7f7;
+    -color-bg-login: #f0f0f0;
+    -color-surface: #ffffff;
+    -color-border-soft: #cfcfcf;
+    -color-border-card: #d0d0d0;
+    -color-badge-bg: #e8f0ff;
+    -color-brand-deep: #1f3a5f;
+    -color-primary: #2b4c7e;
+    -color-secondary-border: #8aa5cf;
+    -color-border-default: #bcbcbc;
+    -color-text-dark: #333333;
+    -color-selection: #d9e8ff;
+    -color-accent: #4d82c8;
+    -color-title: #1f2937;
+    -color-subtitle: #4b5563;
+    -color-label: #374151;
+    -color-error: #ef4444;
+    -color-muted: #6b7280;
+}
+
+.root-background {
+    -fx-background-color: -color-bg-root;
+}
+
+.login-background {
+    -fx-background-color: -color-bg-login;
+}
+
+.login-card {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: -color-border-soft;
+    -fx-border-width: 1;
+}
+
+.card-surface {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 0;
+    -fx-border-color: -color-border-card;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+}
+
+.top-badge {
+    -fx-background-color: -color-badge-bg;
+    -fx-background-radius: 0;
+    -fx-padding: 6 12 6 12;
+    -fx-text-fill: -color-brand-deep;
+    -fx-font-weight: 700;
+}
+
+.btn-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: -color-surface;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 8 14 8 14;
+    -fx-font-size: 12;
+    -fx-font-weight: 700;
+}
+
+.btn-secondary {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-secondary-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: -color-brand-deep;
+    -fx-padding: 8 14 8 14;
+    -fx-font-size: 12;
+    -fx-font-weight: 700;
+}
+
+.btn-ghost {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: -color-text-dark;
+    -fx-padding: 8 14 8 14;
+    -fx-font-size: 12;
+    -fx-font-weight: 600;
+}
+
+.input-field {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 8 10 8 10;
+}
+
+.list-control {
+    -fx-background-insets: 0;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.table-control {
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-selection-bar: -color-selection;
+    -fx-selection-bar-non-focused: -color-selection;
+}
+
+.activity-table .column-header .label {
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-text-dark;
+}
+
+.tab-pane-custom {
+    -fx-background-color: transparent;
+    -fx-tab-min-height: 34;
+    -fx-tab-max-height: 34;
+    -fx-accent: -color-accent;
+}
+
+.dialog-pane-custom {
+    -fx-background-color: -color-bg-root;
+}
+
+.title-xl {
+    -fx-font-size: 26;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-title;
+}
+
+.title-l {
+    -fx-font-size: 20;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-title;
+}
+
+.title-m {
+    -fx-font-size: 16;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-title;
+}
+
+.subtitle-text {
+    -fx-text-fill: -color-subtitle;
+    -fx-font-size: 13;
+}
+
+.form-label {
+    -fx-text-fill: -color-label;
+    -fx-font-size: 12.5;
+    -fx-font-weight: 600;
+}
+
+.error-text {
+    -fx-text-fill: -color-error;
+    -fx-font-size: 12;
+}
+
+.status-text {
+    -fx-text-fill: -color-subtitle;
+    -fx-font-size: 12;
+}
+
+.project-name-small {
+    -fx-text-fill: -color-title;
+    -fx-font-size: 13;
+    -fx-font-weight: 700;
+}
+
+.project-meta-small {
+    -fx-text-fill: -color-muted;
+    -fx-font-size: 11;
+}
+
+.project-header-label {
+    -fx-text-fill: -color-subtitle;
+    -fx-font-size: 11;
+    -fx-font-weight: 700;
+}
+
+.topbar-button {
+    -fx-padding: 5 10 5 10;
+    -fx-font-size: 11;
+}
