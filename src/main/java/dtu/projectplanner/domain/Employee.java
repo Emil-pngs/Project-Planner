@@ -25,6 +25,10 @@ public class Employee {
         }
     }
 
+    void removeAssignedActivity(Activity activity) {
+        assignedActivities.remove(activity);
+    }
+
     // We keep the entity specific business rules here (Rich Domain Model)
     public boolean isAvailableFor(Activity activity) {
         if (isAssignedTo(activity)) return false;

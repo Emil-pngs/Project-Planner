@@ -33,6 +33,12 @@ public class Activity {
         }
     }
 
+    public void unassignEmployee(Employee employee) {
+        if (assignedEmployees.remove(employee)) {
+            employee.removeAssignedActivity(this);
+        }
+    }
+
     public void registerTimeEntry(TimeEntry timeEntry) {
         timeEntries.add(timeEntry);
     }
@@ -60,12 +66,28 @@ public class Activity {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getStartWeek() {
         return startWeek;
     }
 
+    public void setStartWeek(int startWeek) {
+        this.startWeek = startWeek;
+    }
+
     public int getEndWeek() {
         return endWeek;
+    }
+
+    public void setEndWeek(int endWeek) {
+        this.endWeek = endWeek;
+    }
+
+    public void setBudgetedHours(int budgetedHours) {
+        this.budgetedHours = budgetedHours;
     }
 
     public ActivityStatus getStatus() {
