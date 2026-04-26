@@ -42,7 +42,9 @@ public class ProjectPlanningService {
     public Activity addActivity(int projectID, String name, int budgetedHours, int startWeek, int endWeek, String requesterInitials) throws Exception {
         Project project = getProjectOrFail(projectID);
         Employee requester = getEmployeeOrFail(normalizeInitials(requesterInitials));
-        requireCanEditProject(project, requester);
+        if (!canViewProject(project, requester)) {
+            throw new Exception("Not allowed to edit project " + project.getProjectID());
+        }
 
         Activity newActivity = new Activity(nextActivityID++, name, budgetedHours, startWeek, endWeek);
         project.addActivity(newActivity);
