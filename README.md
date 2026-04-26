@@ -14,7 +14,7 @@ The system helps project leaders and employees manage software development proje
 - Create projects with auto-assigned numbers in the format `YYXXX` (e.g., `26001`, `26002`)
 - Add activities to projects with a name, budgeted hours, and a week-level start/end range (e.g., week 10–12, 2026)
 - Assign one or more employees to an activity
-- Register time entries on activities (½-hour accuracy)
+- Register time entries on activities
 - View available employees for an activity (those not already assigned)
 - Track activity status: `PLANNED`, `IN_PROGRESS`, or `COMPLETED`
 - Generate a project report showing budgeted hours, registered hours, and remaining work
