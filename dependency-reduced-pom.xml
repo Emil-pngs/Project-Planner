@@ -5,6 +5,18 @@
   <artifactId>javaFX_project</artifactId>
   <version>0.1.1</version>
   <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <targetPath>features</targetPath>
+        <directory>features</directory>
+        <includes>
+          <include>**/*.feature</include>
+        </includes>
+      </testResource>
+    </testResources>
     <finalName>ProjectPlanner</finalName>
     <plugins>
       <plugin>
@@ -20,6 +32,12 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.1</version>
         <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+            <include>**/*TestCase.java</include>
+            <include>**/*Steps.java</include>
+          </includes>
           <properties>
             <configurationParameters>cucumber.junit-platform.naming-strategy=long</configurationParameters>
           </properties>
