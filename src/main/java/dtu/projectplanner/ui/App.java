@@ -229,13 +229,19 @@ public class App extends Application {
         HBox left = new HBox(12, logo, user);
         left.setAlignment(Pos.CENTER_LEFT);
 
-        HBox actions = new HBox(8, createProjectBtn, createActivityBtn, editActivityBtn, registerTimeBtn, reportBtn, editViewersBtn, populateBtn, darkModeBtn, logoutBtn);
+        HBox row1 = new HBox(8, createProjectBtn, createActivityBtn, editActivityBtn, editViewersBtn);
+        row1.setAlignment(Pos.CENTER_RIGHT);
+
+        HBox row2 = new HBox(8, registerTimeBtn, reportBtn, populateBtn, darkModeBtn, logoutBtn);
+        row2.setAlignment(Pos.CENTER_RIGHT);
+
+        VBox actions = new VBox(4, row1, row2);
         actions.setAlignment(Pos.CENTER_RIGHT);
 
         BorderPane bar = new BorderPane();
         bar.setLeft(left);
         bar.setRight(actions);
-        bar.setPadding(new Insets(8, 4, 10, 4));
+        bar.setPadding(new Insets(8, 4, 8, 4));
         updateLeaderOnlyButtons();
         return bar;
     }
