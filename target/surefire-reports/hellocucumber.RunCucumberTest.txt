@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: hellocucumber.RunCucumberTest
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.130 s -- in hellocucumber.RunCucumberTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in hellocucumber.RunCucumberTest
