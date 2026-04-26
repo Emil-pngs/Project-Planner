@@ -464,8 +464,11 @@ public class App extends Application {
             && selectedProject.getProjectLeader() != null
             && currentEmployee != null
             && selectedProject.getProjectLeader().getInitials().equals(currentEmployee.getInitials());
+        boolean canViewSelectedProject = selectedProject != null
+            && currentEmployee != null
+            && selectedProject.canBeViewedBy(currentEmployee);
 
-        createActivityBtn.setDisable(!isLeader);
+        createActivityBtn.setDisable(!canViewSelectedProject);
         editActivityBtn.setDisable(!isLeader || selectedActivity == null);
         editViewersBtn.setDisable(!isLeader);
     }
@@ -541,9 +544,8 @@ public class App extends Application {
             return;
         }
 
-        if (selectedProject.getProjectLeader() == null
-            || !selectedProject.getProjectLeader().getInitials().equals(currentEmployee.getInitials())) {
-            status("Only the project leader can create activities");
+        if (!selectedProject.canBeViewedBy(currentEmployee)) {
+            status("Only project members can create activities");
             return;
         }
 
