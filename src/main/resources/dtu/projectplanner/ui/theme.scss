@@ -1,24 +1,46 @@
+// Palette
+$bg-root:        #f7f7f7;
+$bg-login:       #f0f0f0;
+$surface:        #ffffff;
+$border-soft:    #cfcfcf;
+$border-card:    #d0d0d0;
+$badge-bg:       #e8f0ff;
+$brand-deep:     #1f3a5f;
+$primary:        #2b4c7e;
+$secondary-bdr:  #8aa5cf;
+$border-default: #bcbcbc;
+$text-dark:      #333333;
+$selection:      #d9e8ff;
+$accent:         #4d82c8;
+$title:          #1f2937;
+$subtitle:       #4b5563;
+$label:          #374151;
+$error:          #ef4444;
+$muted:          #6b7280;
+
+// Root custom properties
 .root {
-  -color-bg-root: #f7f7f7;
-  -color-bg-login: #f0f0f0;
-  -color-surface: #ffffff;
-  -color-border-soft: #cfcfcf;
-  -color-border-card: #d0d0d0;
-  -color-badge-bg: #e8f0ff;
-  -color-brand-deep: #1f3a5f;
-  -color-primary: #2b4c7e;
-  -color-secondary-border: #8aa5cf;
-  -color-border-default: #bcbcbc;
-  -color-text-dark: #333333;
-  -color-selection: #d9e8ff;
-  -color-accent: #4d82c8;
-  -color-title: #1f2937;
-  -color-subtitle: #4b5563;
-  -color-label: #374151;
-  -color-error: #ef4444;
-  -color-muted: #6b7280;
+  -color-bg-root:          #{$bg-root};
+  -color-bg-login:         #{$bg-login};
+  -color-surface:          #{$surface};
+  -color-border-soft:      #{$border-soft};
+  -color-border-card:      #{$border-card};
+  -color-badge-bg:         #{$badge-bg};
+  -color-brand-deep:       #{$brand-deep};
+  -color-primary:          #{$primary};
+  -color-secondary-border: #{$secondary-bdr};
+  -color-border-default:   #{$border-default};
+  -color-text-dark:        #{$text-dark};
+  -color-selection:        #{$selection};
+  -color-accent:           #{$accent};
+  -color-title:            #{$title};
+  -color-subtitle:         #{$subtitle};
+  -color-label:            #{$label};
+  -color-error:            #{$error};
+  -color-muted:            #{$muted};
 }
 
+// Backgrounds
 .root-background {
   -fx-background-color: -color-bg-root;
 }
@@ -27,6 +49,7 @@
   -fx-background-color: -color-bg-login;
 }
 
+// Cards / surfaces
 .login-card {
   -fx-background-color: -color-surface;
   -fx-background-radius: 0;
@@ -43,6 +66,7 @@
   -fx-border-radius: 0;
 }
 
+// Badge
 .top-badge {
   -fx-background-color: -color-badge-bg;
   -fx-background-radius: 0;
@@ -51,6 +75,7 @@
   -fx-font-weight: 700;
 }
 
+// Buttons
 .btn-primary {
   -fx-background-color: -color-primary;
   -fx-text-fill: -color-surface;
@@ -85,6 +110,7 @@
   -fx-font-weight: 600;
 }
 
+// Inputs
 .input-field {
   -fx-background-color: -color-surface;
   -fx-border-color: -color-border-default;
@@ -94,6 +120,7 @@
   -fx-padding: 8 10 8 10;
 }
 
+// Lists / Tables
 .list-control {
   -fx-background-insets: 0;
   -fx-border-color: -color-border-default;
@@ -116,6 +143,7 @@
   -fx-text-fill: -color-text-dark;
 }
 
+// Tab pane
 .tab-pane-custom {
   -fx-background-color: transparent;
   -fx-tab-min-height: 34;
@@ -131,10 +159,12 @@
   -fx-background-color: transparent;
 }
 
+// Dialogs
 .dialog-pane-custom {
   -fx-background-color: -color-bg-root;
 }
 
+// Typography
 .title-xl {
   -fx-font-size: 26;
   -fx-font-weight: 700;
@@ -174,6 +204,7 @@
   -fx-font-size: 12;
 }
 
+// Project list
 .project-name-small {
   -fx-text-fill: -color-title;
   -fx-font-size: 13;
@@ -191,6 +222,7 @@
   -fx-font-weight: 700;
 }
 
+// Top bar
 .topbar-button {
   -fx-padding: 5 10 5 10;
   -fx-font-size: 11;
