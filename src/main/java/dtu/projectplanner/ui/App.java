@@ -63,6 +63,8 @@ public class App extends Application {
     private Project selectedProject;
     private Activity selectedActivity;
 
+    private boolean darkMode = false;
+
     private Label projectTitleLabel;
     private Label projectInfoLabel;
     private Label projectViewersLabel;
@@ -155,7 +157,9 @@ public class App extends Application {
             }
 
             currentEmployee = user;
-            scene.setRoot(buildMainView());
+            Pane main = buildMainView();
+            scene.setRoot(main);
+            applyTheme(main);
         };
 
         loginBtn.setOnAction(e -> doLogin.run());
@@ -209,13 +213,23 @@ public class App extends Application {
             currentEmployee = null;
             selectedProject = null;
             selectedActivity = null;
-            scene.setRoot(buildLoginView());
+            Pane login = buildLoginView();
+            scene.setRoot(login);
+            applyTheme(login);
+        });
+
+        Button darkModeBtn = new Button(darkMode ? "Light mode" : "Dark mode");
+        darkModeBtn.getStyleClass().addAll("btn-ghost", "topbar-button");
+        darkModeBtn.setOnAction(e -> {
+            darkMode = !darkMode;
+            darkModeBtn.setText(darkMode ? "Light mode" : "Dark mode");
+            applyTheme(scene.getRoot());
         });
 
         HBox left = new HBox(12, logo, user);
         left.setAlignment(Pos.CENTER_LEFT);
 
-        HBox actions = new HBox(8, createProjectBtn, createActivityBtn, editActivityBtn, registerTimeBtn, reportBtn, editViewersBtn, populateBtn, logoutBtn);
+        HBox actions = new HBox(8, createProjectBtn, createActivityBtn, editActivityBtn, registerTimeBtn, reportBtn, editViewersBtn, populateBtn, darkModeBtn, logoutBtn);
         actions.setAlignment(Pos.CENTER_RIGHT);
 
         BorderPane bar = new BorderPane();
@@ -971,6 +985,14 @@ public class App extends Application {
             throw new IllegalArgumentException(error);
         }
         return value.trim();
+    }
+
+    private void applyTheme(Node root) {
+        if (darkMode) {
+            if (!root.getStyleClass().contains("dark")) root.getStyleClass().add("dark");
+        } else {
+            root.getStyleClass().remove("dark");
+        }
     }
 
     private void status(String msg) {

@@ -19,6 +19,27 @@
   -color-muted: #6b7280;
 }
 
+.root.dark {
+  -color-bg-root: #1e1e2e;
+  -color-bg-login: #181825;
+  -color-surface: #2a2a3e;
+  -color-border-soft: #45475a;
+  -color-border-card: #45475a;
+  -color-badge-bg: #1e3a5f;
+  -color-brand-deep: #89b4fa;
+  -color-primary: #5b8fd6;
+  -color-secondary-border: #585b70;
+  -color-border-default: #585b70;
+  -color-text-dark: #cdd6f4;
+  -color-selection: #3b3f5c;
+  -color-accent: #89b4fa;
+  -color-title: #cdd6f4;
+  -color-subtitle: #bac2de;
+  -color-label: #a6adc8;
+  -color-error: #f38ba8;
+  -color-muted: #6c7086;
+}
+
 .root-background {
   -fx-background-color: -color-bg-root;
 }
