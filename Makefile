@@ -16,7 +16,7 @@ styles:
 	fi
 	@echo "Compiled $(THEME_SCSS) -> $(THEME_CSS)"
 
-build: styles
+build:
 	mvn package -q
 	@echo "Built $(FAT_JAR) (fat jar)"
 	@echo "Built $(THIN_JAR) (thin jar)"
@@ -26,7 +26,7 @@ build: styles
 test:
 	mvn test
 
-run: styles
+run:
 	mvn javafx:run -q
 
 clean:
