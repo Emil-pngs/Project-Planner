@@ -99,6 +99,18 @@
 
 	<build>
 		<finalName>ProjectPlanner</finalName>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>features</directory>
+				<targetPath>features</targetPath>
+				<includes>
+					<include>**/*.feature</include>
+				</includes>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -115,6 +127,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*Tests.java</include>
+						<include>**/*TestCase.java</include>
+						<include>**/*Steps.java</include>
+					</includes>
 					<properties>
 						<!-- Work around. Surefire does not include enough
                              information to disambiguate between different
