@@ -62,6 +62,173 @@ $muted:          #6b7280;
   -color-muted:            #6c7086;
 }
 
+// Dark mode sub-component overrides
+.root.dark .table-row-cell {
+  -fx-background-color: #2a2a3e;
+  -fx-text-fill: #cdd6f4;
+  -fx-border-color: transparent;
+  -fx-border-width: 0 0 0.5 0;
+}
+
+.root.dark .table-row-cell:odd {
+  -fx-background-color: #252535;
+}
+
+.root.dark .table-row-cell:selected,
+.root.dark .table-row-cell:selected:hover {
+  -fx-background-color: #3b3f5c;
+}
+
+.root.dark .table-row-cell:hover {
+  -fx-background-color: #313145;
+}
+
+.root.dark .table-cell {
+  -fx-text-fill: #cdd6f4;
+  -fx-border-color: #383850;
+  -fx-border-width: 0 0.5 0 0;
+}
+
+.root.dark .column-header-background {
+  -fx-background-color: #1e1e2e;
+}
+
+.root.dark .column-header {
+  -fx-background-color: #1e1e2e;
+  -fx-border-color: #45475a;
+}
+
+.root.dark .column-header .label {
+  -fx-text-fill: #cdd6f4;
+}
+
+.root.dark .list-cell {
+  -fx-background-color: #2a2a3e;
+  -fx-text-fill: #cdd6f4;
+}
+
+.root.dark .list-cell:odd {
+  -fx-background-color: #252535;
+}
+
+.root.dark .list-cell:filled:hover {
+  -fx-background-color: #313145;
+}
+
+.root.dark .list-cell:filled:selected {
+  -fx-background-color: #3b3f5c;
+  -fx-text-fill: #cdd6f4;
+}
+
+.root.dark .tab-header-area {
+  -fx-background-color: transparent;
+}
+
+.root.dark .tab-header-background {
+  -fx-background-color: transparent;
+}
+
+.root.dark .tab {
+  -fx-background-color: #313145;
+  -fx-border-color: #45475a;
+}
+
+.root.dark .tab:selected {
+  -fx-background-color: #2a2a3e;
+}
+
+.root.dark .tab .tab-label {
+  -fx-text-fill: #bac2de;
+}
+
+.root.dark .tab:selected .tab-label {
+  -fx-text-fill: #cdd6f4;
+}
+
+.root.dark .tab-content-area {
+  -fx-background-color: transparent;
+}
+
+.root.dark .scroll-bar {
+  -fx-background-color: #2a2a3e;
+}
+
+.root.dark .scroll-bar .track {
+  -fx-background-color: #1e1e2e;
+}
+
+.root.dark .scroll-bar .thumb {
+  -fx-background-color: #585b70;
+  -fx-background-radius: 4;
+}
+
+.root.dark .combo-box {
+  -fx-background-color: #2a2a3e;
+  -fx-border-color: #585b70;
+  -fx-border-width: 1;
+}
+
+.root.dark .combo-box .list-cell {
+  -fx-background-color: #2a2a3e;
+  -fx-text-fill: #cdd6f4;
+}
+
+.root.dark .combo-box-popup .list-view {
+  -fx-background-color: #2a2a3e;
+  -fx-border-color: #585b70;
+}
+
+.root.dark .dialog-pane {
+  -fx-background-color: #1e1e2e;
+}
+
+.root.dark .dialog-pane .header-panel {
+  -fx-background-color: #252535;
+}
+
+.root.dark .check-box .box {
+  -fx-background-color: #2a2a3e;
+  -fx-border-color: #585b70;
+}
+
+.root.dark .check-box:selected .box {
+  -fx-background-color: #5b8fd6;
+  -fx-border-color: #5b8fd6;
+}
+
+// TableView and ListView container backgrounds (JavaFX ignores surface color for these)
+.root.dark .table-view {
+  -fx-background-color: #2a2a3e;
+  -fx-border-color: #45475a;
+}
+
+.root.dark .table-view .virtual-flow .clipped-container,
+.root.dark .table-view .virtual-flow .clipped-container .sheet {
+  -fx-background-color: #2a2a3e;
+}
+
+.root.dark .table-view .placeholder {
+  -fx-background-color: #2a2a3e;
+}
+
+.root.dark .table-view .placeholder .label {
+  -fx-text-fill: #6c7086;
+}
+
+.root.dark .list-view {
+  -fx-background-color: #2a2a3e;
+  -fx-border-color: #45475a;
+}
+
+.root.dark .list-view .virtual-flow .clipped-container,
+.root.dark .list-view .virtual-flow .clipped-container .sheet {
+  -fx-background-color: #2a2a3e;
+}
+
+.root.dark .list-view .placeholder .label {
+  -fx-text-fill: #6c7086;
+}
+
 // Backgrounds
 .root-background {
   -fx-background-color: -color-bg-root;
@@ -163,6 +330,94 @@ $muted:          #6b7280;
 .activity-table .column-header .label {
   -fx-font-weight: 700;
   -fx-text-fill: -color-text-dark;
+}
+
+// Table sub-components (light mode)
+.table-view {
+  -fx-background-color: -color-surface;
+  -fx-border-color: -color-border-default;
+  -fx-table-cell-border-color: -color-border-soft;
+}
+
+.table-view .virtual-flow .clipped-container,
+.table-view .virtual-flow .clipped-container .sheet {
+  -fx-background-color: -color-surface;
+}
+
+.table-view .placeholder {
+  -fx-background-color: -color-surface;
+}
+
+.table-view .placeholder .label {
+  -fx-text-fill: -color-muted;
+}
+
+.table-row-cell {
+  -fx-background-color: -color-surface;
+  -fx-text-fill: -color-text-dark;
+  -fx-border-color: transparent;
+  -fx-border-width: 0 0 0.5 0;
+}
+
+.table-row-cell:odd {
+  -fx-background-color: #f5f8ff;
+}
+
+.table-row-cell:hover {
+  -fx-background-color: #eaf1ff;
+}
+
+.table-row-cell:selected,
+.table-row-cell:selected:hover {
+  -fx-background-color: -color-selection;
+}
+
+.table-cell {
+  -fx-text-fill: -color-text-dark;
+  -fx-border-color: #e2e8f0;
+  -fx-border-width: 0 0.5 0 0;
+}
+
+.column-header-background {
+  -fx-background-color: #eef3fb;
+}
+
+.column-header {
+  -fx-background-color: #eef3fb;
+  -fx-border-color: -color-border-soft;
+}
+
+// List sub-components (light mode)
+.list-view {
+  -fx-background-color: -color-surface;
+  -fx-border-color: -color-border-default;
+}
+
+.list-view .virtual-flow .clipped-container,
+.list-view .virtual-flow .clipped-container .sheet {
+  -fx-background-color: -color-surface;
+}
+
+.list-view .placeholder .label {
+  -fx-text-fill: -color-muted;
+}
+
+.list-cell {
+  -fx-background-color: -color-surface;
+  -fx-text-fill: -color-text-dark;
+}
+
+.list-cell:odd {
+  -fx-background-color: #f5f8ff;
+}
+
+.list-cell:filled:hover {
+  -fx-background-color: #eaf1ff;
+}
+
+.list-cell:filled:selected {
+  -fx-background-color: -color-selection;
+  -fx-text-fill: -color-brand-deep;
 }
 
 // Tab pane
