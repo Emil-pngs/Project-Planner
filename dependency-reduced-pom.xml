@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dtu</groupId>
   <artifactId>javaFX_project</artifactId>
-  <version>0.0.9</version>
+  <version>0.1.1</version>
   <build>
     <finalName>ProjectPlanner</finalName>
     <plugins>
