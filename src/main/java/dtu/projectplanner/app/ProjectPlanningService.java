@@ -49,6 +49,33 @@ public class ProjectPlanningService {
         return newActivity;
     }
 
+    public Activity editActivity(
+        int projectID,
+        int activityID,
+        String name,
+        int budgetedHours,
+        int startWeek,
+        int endWeek,
+        ActivityStatus status,
+        String requesterInitials
+    ) throws Exception {
+        Project project = getProjectOrFail(projectID);
+        Employee requester = getEmployeeOrFail(normalizeInitials(requesterInitials));
+        requireCanEditProject(project, requester);
+
+        Activity activity = project.findActivityByID(activityID);
+        if (activity == null) {
+            throw new Exception("Activity with ID " + activityID + " not found in project " + projectID);
+        }
+
+        activity.setName(name);
+        activity.setBudgetedHours(budgetedHours);
+        activity.setStartWeek(startWeek);
+        activity.setEndWeek(endWeek);
+        activity.setStatus(status);
+        return activity;
+    }
+
     public void assignEmployee(int projectID, int activityID, String initials, String requesterInitials) throws Exception {
         Project project = getProjectOrFail(projectID);
         Employee requester = getEmployeeOrFail(normalizeInitials(requesterInitials));
@@ -64,6 +91,20 @@ public class ProjectPlanningService {
         // The domain model handles the list updates and consistency
         activity.assignEmployee(employee);
         project.grantViewAccess(employee);
+    }
+
+    public void unassignEmployee(int projectID, int activityID, String initials, String requesterInitials) throws Exception {
+        Project project = getProjectOrFail(projectID);
+        Employee requester = getEmployeeOrFail(normalizeInitials(requesterInitials));
+        requireCanEditProject(project, requester);
+
+        Employee employee = getEmployeeOrFail(initials);
+        Activity activity = project.findActivityByID(activityID);
+        if (activity == null) {
+            throw new Exception("Activity with ID " + activityID + " not found in project " + projectID);
+        }
+
+        activity.unassignEmployee(employee);
     }
 
     public void registerTime(int projectID, int activityID, String initials, TimeEntry entry, String requesterInitials) throws Exception {
