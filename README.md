@@ -36,7 +36,6 @@ The system helps project leaders and employees manage software development proje
 - (Optionally) JDK 25.0.2 or higher
 - (Optionally) GNU make 4.4.1 or higher
 - (Optionally) Apache Maven 3.9.11 or higher
-- (Optionally) Dart Sass CLI 1.77.8 or higher
 
 > Make, Maven, and Sass are optional tools used when building or styling from source. The prebuilt jar only requires Java.
 
