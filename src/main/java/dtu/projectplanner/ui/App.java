@@ -299,9 +299,6 @@ public class App extends Application {
 
         VBox projectHeader = new VBox(3, headerTag, projectTitleLabel, projectInfoLabel, projectViewersLabel);
 
-        Label subtitle = new Label("Activities");
-        subtitle.getStyleClass().add("subtitle-text");
-
         activityTable = new TableView<>(activityItems);
         activityTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         activityTable.setPlaceholder(new Label("No activities yet"));
@@ -330,7 +327,7 @@ public class App extends Application {
         });
 
         VBox.setVgrow(activityTable, Priority.ALWAYS);
-        panel.getChildren().addAll(projectHeader, subtitle, activityTable);
+        panel.getChildren().addAll(projectHeader, activityTable);
         BorderPane.setMargin(panel, new Insets(0, 12, 0, 0));
         return panel;
     }
@@ -353,9 +350,6 @@ public class App extends Application {
         });
         teamList.getStyleClass().add("list-control");
 
-        Label title = new Label("Your activities");
-        title.getStyleClass().add("title-m");
-
         myActivityList = new ListView<>(myActivityItems);
         myActivityList.setCellFactory(v -> new ListCell<>() {
             @Override
@@ -369,9 +363,7 @@ public class App extends Application {
         Tab teamTab = new Tab("Team", teamList);
         teamTab.setClosable(false);
 
-        VBox myBox = new VBox(8, title, myActivityList);
-        VBox.setVgrow(myActivityList, Priority.ALWAYS);
-        Tab myTab = new Tab("Your activities", myBox);
+        Tab myTab = new Tab("Your activities", myActivityList);
         myTab.setClosable(false);
 
         TabPane tabs = new TabPane(teamTab, myTab);
