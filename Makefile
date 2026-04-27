@@ -42,14 +42,6 @@ release:
 	TAG="v$$NEW_VERSION"; \
 	RELEASE_FAT="dist/Release $$TAG.jar"; \
 	RELEASE_THIN="dist/Release $$TAG-thin.jar"; \
-	if command -v sass >/dev/null 2>&1; then \
-		sass "$(THEME_SCSS)" "$(THEME_CSS)" --no-source-map; \
-	elif command -v npx >/dev/null 2>&1; then \
-		npx --yes sass "$(THEME_SCSS)" "$(THEME_CSS)" --no-source-map; \
-	else \
-		echo "Error: Sass compiler not found. Install sass or npm/npx."; \
-		exit 1; \
-	fi; \
 	echo "Bumping version: $$CURRENT -> $$NEW_VERSION"; \
 	mvn versions:set -DnewVersion=$$NEW_VERSION -DgenerateBackupPoms=false -q; \
 	mvn package -q; \
