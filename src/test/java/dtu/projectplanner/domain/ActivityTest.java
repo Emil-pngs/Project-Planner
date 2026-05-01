@@ -2,6 +2,8 @@ package dtu.projectplanner.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,5 +32,28 @@ class ActivityTest {
             IllegalArgumentException.class,
             () -> activity.setBudgetedHours(-1)
         );
+    }
+
+    @Test
+    void duplicateEmployeeAssignmentIsPrevented() {
+        Activity activity = new Activity(1, "Planning", 12, 10, 12);
+        Employee employee = new Employee("Sara", "sara");
+
+        activity.assignEmployee(employee);
+        activity.assignEmployee(employee);
+
+        assertEquals(1, employee.getAssignedActivities().size());
+    }
+
+    @Test
+    void registeredTimeReducesRemainingHours() {
+        Activity activity = new Activity(2, "Implementation", 10, 12, 16);
+        Employee employee = new Employee("Mads", "mads");
+        activity.assignEmployee(employee);
+
+        activity.registerTimeEntry(new TimeEntry(LocalDate.now(), 3, employee, activity));
+        activity.registerTimeEntry(new TimeEntry(LocalDate.now(), 2, employee, activity));
+
+        assertEquals(5, activity.remainingHours());
     }
 }
