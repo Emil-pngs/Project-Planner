@@ -76,7 +76,10 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>23-ea+3</version>
 		</dependency>
-		<!-- Platform-specific natives so the jar runs across operating systems -->
+		<!--
+		Disabled for mac support
+		Platform-specific natives so the jar runs across operating systems
+
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-graphics</artifactId>
@@ -95,6 +98,7 @@
 			<version>23-ea+3</version>
 			<classifier>mac</classifier>
 		</dependency>
+		-->
 	</dependencies>
 
 	<build>
