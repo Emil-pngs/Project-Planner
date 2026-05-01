@@ -9,6 +9,9 @@ public class Employee {
     private List<Activity> assignedActivities = new ArrayList<>();
 
     public Employee(String name, String initials) {
+        if (initials == null || !initials.matches("[a-zA-Z]{1,4}")) {
+            throw new IllegalArgumentException("Employee initials must be 1 to 4 letters");
+        }
         this.name = name;
         this.initials = initials;
     }

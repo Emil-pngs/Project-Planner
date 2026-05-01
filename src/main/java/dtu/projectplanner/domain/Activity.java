@@ -15,6 +15,24 @@ public class Activity {
     private List<TimeEntry> timeEntries = new ArrayList<>();
     
     public Activity(int activityID, String name, int budgetedHours, int startWeek, int endWeek) {
+        if (activityID <= 0) {
+            throw new IllegalArgumentException("Activity ID must be positive");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Activity name is required");
+        }
+        if (budgetedHours < 0) {
+            throw new IllegalArgumentException("Budgeted hours cannot be negative");
+        }
+        if (startWeek < 1 || startWeek > 53) {
+            throw new IllegalArgumentException("Start week must be between 1 and 53");
+        }
+        if (endWeek < 1 || endWeek > 53) {
+            throw new IllegalArgumentException("End week must be between 1 and 53");
+        }
+        if (endWeek < startWeek) {
+            throw new IllegalArgumentException("End week cannot be before start week");
+        }
         this.activityID = activityID;
         this.name = name;
         this.budgetedHours = budgetedHours;
@@ -67,6 +85,9 @@ public class Activity {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Activity name is required");
+        }
         this.name = name;
     }
 
@@ -75,6 +96,12 @@ public class Activity {
     }
 
     public void setStartWeek(int startWeek) {
+        if (startWeek < 1 || startWeek > 53) {
+            throw new IllegalArgumentException("Start week must be between 1 and 53");
+        }
+        if (endWeek < startWeek) {
+            throw new IllegalArgumentException("Start week cannot be after end week");
+        }
         this.startWeek = startWeek;
     }
 
@@ -83,10 +110,19 @@ public class Activity {
     }
 
     public void setEndWeek(int endWeek) {
+        if (endWeek < 1 || endWeek > 53) {
+            throw new IllegalArgumentException("End week must be between 1 and 53");
+        }
+        if (endWeek < startWeek) {
+            throw new IllegalArgumentException("End week cannot be before start week");
+        }
         this.endWeek = endWeek;
     }
 
     public void setBudgetedHours(int budgetedHours) {
+        if (budgetedHours < 0) {
+            throw new IllegalArgumentException("Budgeted hours cannot be negative");
+        }
         this.budgetedHours = budgetedHours;
     }
 
