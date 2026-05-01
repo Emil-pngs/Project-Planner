@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ActivityTest {
 
     @Test
+    void constructorRejectsNonPositiveActivityID() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(0, "Planning", 10, 10, 12)
+        );
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(-1, "Planning", 10, 10, 12)
+        );
+    }
+
+    @Test
     void storeZeroBudgetedHours() {
         Activity activity = new Activity(1, "Planning", 0, 10, 12);
 

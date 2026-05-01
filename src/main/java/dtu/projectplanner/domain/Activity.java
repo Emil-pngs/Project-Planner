@@ -15,6 +15,9 @@ public class Activity {
     private List<TimeEntry> timeEntries = new ArrayList<>();
     
     public Activity(int activityID, String name, int budgetedHours, int startWeek, int endWeek) {
+        if (activityID <= 0) {
+            throw new IllegalArgumentException("Activity ID must be positive");
+        }
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Activity name is required");
         }
