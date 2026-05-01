@@ -11,6 +11,9 @@ public class TimeEntry {
     private Activity activity;
 
     public TimeEntry(LocalDate date, int hours, Employee employee, Activity activity) {
+        if (hours <= 0) {
+            throw new IllegalArgumentException("Hours must be positive");
+        }
         this.date = date;
         this.hours = hours;
         this.employee = employee;
