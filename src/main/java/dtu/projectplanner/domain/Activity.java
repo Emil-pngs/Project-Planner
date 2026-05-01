@@ -15,6 +15,9 @@ public class Activity {
     private List<TimeEntry> timeEntries = new ArrayList<>();
     
     public Activity(int activityID, String name, int budgetedHours, int startWeek, int endWeek) {
+        if (budgetedHours < 0) {
+            throw new IllegalArgumentException("Budgeted hours cannot be negative");
+        }
         this.activityID = activityID;
         this.name = name;
         this.budgetedHours = budgetedHours;
@@ -87,6 +90,9 @@ public class Activity {
     }
 
     public void setBudgetedHours(int budgetedHours) {
+        if (budgetedHours < 0) {
+            throw new IllegalArgumentException("Budgeted hours cannot be negative");
+        }
         this.budgetedHours = budgetedHours;
     }
 
