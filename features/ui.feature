@@ -86,14 +86,14 @@ Feature: UI behavior
     Then ui test viewers should contain "outs"
 
   Scenario: User creates project without assigning another leader
-    Given ui test has employee "alice"
-    When ui test user "alice" presses create project button for "Proj A"
-    Then ui test created project leader should be "alice"
+    Given ui test has employee "alic"
+    When ui test user "alic" presses create project button for "Proj A"
+    Then ui test created project leader should be "alic"
 
   Scenario: User creates project and assigns another project leader
-    Given ui test has employee "alice"
+    Given ui test has employee "alic"
     And ui test has employee "bob"
-    When ui test user "alice" presses create project button for "Proj B" and assigns "bob" as project leader
+    When ui test user "alic" presses create project button for "Proj B" and assigns "bob" as project leader
     Then ui test created project leader should be "bob"
 
   Scenario: User cancels create project dialog
@@ -121,6 +121,5 @@ Feature: UI behavior
     Given ui test has project led by "lead"
     When ui test user "lead" tries to remove self from project viewers
     Then ui test viewers should contain "lead"
-
 
 
