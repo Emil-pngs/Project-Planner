@@ -9,6 +9,7 @@ nbproject/
 nb-configuration.xml
 
 *.class
+target/
 target/classes/
 target/generated-sources/
 target/generated-test-sources/
