@@ -35,6 +35,36 @@ class ActivityTest {
     }
 
     @Test
+    void constructorRejectsInvalidWeeks() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(1, "Planning", 10, 0, 12)
+        );
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(1, "Planning", 10, 10, 54)
+        );
+    }
+
+    @Test
+    void constructorRejectsEndWeekBeforeStartWeek() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(1, "Planning", 10, 12, 10)
+        );
+    }
+
+    @Test
+    void settersRejectInvalidWeek() {
+        Activity activity = new Activity(1, "Planning", 10, 10, 12);
+
+        assertThrows(IllegalArgumentException.class, () -> activity.setStartWeek(0));
+        assertThrows(IllegalArgumentException.class, () -> activity.setStartWeek(13));
+        assertThrows(IllegalArgumentException.class, () -> activity.setEndWeek(54));
+        assertThrows(IllegalArgumentException.class, () -> activity.setEndWeek(9));
+    }
+
+    @Test
     void duplicateEmployeeAssignmentIsPrevented() {
         Activity activity = new Activity(1, "Planning", 12, 10, 12);
         Employee employee = new Employee("Sara", "sara");
