@@ -35,6 +35,26 @@ class ActivityTest {
     }
 
     @Test
+    void constructorRejectsMissingName() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(1, null, 10, 10, 12)
+        );
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new Activity(1, "  ", 10, 10, 12)
+        );
+    }
+
+    @Test
+    void setterRejectsMissingName() {
+        Activity activity = new Activity(1, "Planning", 10, 10, 12);
+
+        assertThrows(IllegalArgumentException.class, () -> activity.setName(null));
+        assertThrows(IllegalArgumentException.class, () -> activity.setName(""));
+    }
+
+    @Test
     void constructorRejectsInvalidWeeks() {
         assertThrows(
             IllegalArgumentException.class,

@@ -15,6 +15,9 @@ public class Activity {
     private List<TimeEntry> timeEntries = new ArrayList<>();
     
     public Activity(int activityID, String name, int budgetedHours, int startWeek, int endWeek) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Activity name is required");
+        }
         if (budgetedHours < 0) {
             throw new IllegalArgumentException("Budgeted hours cannot be negative");
         }
@@ -79,6 +82,9 @@ public class Activity {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Activity name is required");
+        }
         this.name = name;
     }
 
