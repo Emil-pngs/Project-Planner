@@ -35,6 +35,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -131,7 +132,7 @@ public class App extends Application {
         Label title = new Label("Project Planner");
         title.getStyleClass().add("title-xl");
 
-        Label subtitle = new Label("Sign in with at least 4 letters.");
+        Label subtitle = new Label("Sign in with up to 4 letters.");
         subtitle.getStyleClass().add("subtitle-text");
 
         TextField initialsField = field("Your initials (e.g. huba)");
@@ -145,8 +146,8 @@ public class App extends Application {
 
         Runnable doLogin = () -> {
             String raw = initialsField.getText() == null ? "" : initialsField.getText().trim().toLowerCase(Locale.ROOT);
-            if (!raw.matches("[a-zA-Z]{4,}")) {
-                validation.setText("Use at least 4 English letters.");
+            if (!raw.matches("[a-zA-Z]{1,4}")) {
+                validation.setText("Use up to 4 letters.");
                 return;
             }
 
@@ -551,9 +552,10 @@ public class App extends Application {
 
         Dialog<ButtonType> dialog = baseDialog("Create activity");
         TextField nameField = field("Activity title");
-        TextField startField = field("0");
+        TextField startField = field("1");
         TextField endField = field("8");
         TextField hoursField = field("50");
+        Label validation = validationLabel();
 
         List<Employee> allEmployees;
         try {
@@ -574,13 +576,12 @@ public class App extends Application {
             wrapField("Title", nameField),
             new HBox(10, wrapField("Start week", startField), wrapField("End week", endField)),
             wrapField("Estimated hours", hoursField),
+            validation,
             assigneePanel.container()
         ));
 
-        dialog.showAndWait().ifPresent(bt -> {
-            if (bt != ButtonType.OK) {
-                return;
-            }
+        Node okButtonNode = dialog.getDialogPane().lookupButton(ButtonType.OK);
+        okButtonNode.addEventFilter(ActionEvent.ACTION, event -> {
             try {
                 String name = nonBlank(nameField.getText(), "Activity title is required");
                 int start = Integer.parseInt(nonBlank(startField.getText(), "Start week is required"));
@@ -599,11 +600,20 @@ public class App extends Application {
                 refreshMyActivities();
                 status("Activity created: " + name);
             } catch (NumberFormatException ex) {
+                showDialogError(validation, "Weeks and estimated hours must be whole numbers.");
                 status("Weeks and hours must be integers");
-            } catch (Exception ex) {
+                event.consume();
+            } catch (IllegalArgumentException ex) {
+                showDialogError(validation, ex.getMessage());
                 status("Failed to create activity: " + ex.getMessage());
+                event.consume();
+            } catch (Exception ex) {
+                showDialogError(validation, "Failed to create activity: " + ex.getMessage());
+                status("Failed to create activity: " + ex.getMessage());
+                event.consume();
             }
         });
+        dialog.showAndWait();
     }
 
     private void openEditActivityDialog() {
@@ -623,6 +633,7 @@ public class App extends Application {
         TextField startField = field(String.valueOf(selectedActivity.getStartWeek()));
         TextField endField = field(String.valueOf(selectedActivity.getEndWeek()));
         TextField hoursField = field(String.valueOf(selectedActivity.getBudgetedHours()));
+        Label validation = validationLabel();
 
         ComboBox<ActivityStatus> statusBox = new ComboBox<>(FXCollections.observableArrayList(ActivityStatus.values()));
         statusBox.setValue(selectedActivity.getStatus());
@@ -660,13 +671,12 @@ public class App extends Application {
             new HBox(10, wrapField("Start week", startField), wrapField("End week", endField)),
             wrapField("Estimated hours", hoursField),
             wrapField("Status", statusBox),
+            validation,
             assigneePanel.container()
         ));
 
-        dialog.showAndWait().ifPresent(bt -> {
-            if (bt != ButtonType.OK) {
-                return;
-            }
+        Node okButtonNode = dialog.getDialogPane().lookupButton(ButtonType.OK);
+        okButtonNode.addEventFilter(ActionEvent.ACTION, event -> {
             try {
                 String name = nonBlank(nameField.getText(), "Activity title is required");
                 int start = Integer.parseInt(nonBlank(startField.getText(), "Start week is required"));
@@ -719,11 +729,20 @@ public class App extends Application {
                 updateLeaderOnlyButtons();
                 status("Activity updated: " + name);
             } catch (NumberFormatException ex) {
+                showDialogError(validation, "Weeks and estimated hours must be whole numbers.");
                 status("Weeks and hours must be integers");
-            } catch (Exception ex) {
+                event.consume();
+            } catch (IllegalArgumentException ex) {
+                showDialogError(validation, ex.getMessage());
                 status("Failed to edit activity: " + ex.getMessage());
+                event.consume();
+            } catch (Exception ex) {
+                showDialogError(validation, "Failed to edit activity: " + ex.getMessage());
+                status("Failed to edit activity: " + ex.getMessage());
+                event.consume();
             }
         });
+        dialog.showAndWait();
     }
 
     private void openRegisterTimeDialog() {
@@ -766,8 +785,15 @@ public class App extends Application {
                 loadProjects();
                 refreshMyActivities();
                 status("Time registered for " + e.getInitials());
+            } catch (DateTimeParseException ex) {
+                showValidationAlert("Invalid time entry", "Date must use the format yyyy-MM-dd.");
+                status("Date must use the format yyyy-MM-dd");
             } catch (NumberFormatException ex) {
+                showValidationAlert("Invalid time entry", "Hours must be a whole number.");
                 status("Hours must be an integer");
+            } catch (IllegalArgumentException ex) {
+                showValidationAlert("Invalid time entry", ex.getMessage());
+                status("Failed to register time: " + ex.getMessage());
             } catch (Exception ex) {
                 status("Failed to register time: " + ex.getMessage());
             }
@@ -993,6 +1019,30 @@ public class App extends Application {
             throw new IllegalArgumentException(error);
         }
         return value.trim();
+    }
+
+    private Label validationLabel() {
+        Label label = new Label();
+        label.getStyleClass().add("error-text");
+        label.setStyle("-fx-text-fill: #ef4444; -fx-font-size: 12;");
+        label.setWrapText(true);
+        label.setVisible(false);
+        label.setManaged(false);
+        return label;
+    }
+
+    private void showDialogError(Label label, String message) {
+        label.setText(message);
+        label.setVisible(true);
+        label.setManaged(true);
+    }
+
+    private void showValidationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void applyTheme(Node root) {

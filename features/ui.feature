@@ -10,6 +10,11 @@ Feature: UI behavior
     When ui test validates credentials format
     Then ui test credentials should be false
 
+  Scenario: User enters too many credential letters
+    Given ui test has credential input "alice"
+    When ui test validates credentials format
+    Then ui test credentials should be false
+
   Scenario: User toggles dark mode on
     Given ui test dark mode is off
     When ui test user presses dark mode button
@@ -121,5 +126,4 @@ Feature: UI behavior
     Given ui test has project led by "lead"
     When ui test user "lead" tries to remove self from project viewers
     Then ui test viewers should contain "lead"
-
 

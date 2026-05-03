@@ -78,7 +78,7 @@ public class UiSteps {
     @When("ui test validates credentials format")
     public void uiTestValidatesCredentialsFormat() {
         String raw = credentialsInput == null ? "" : credentialsInput.trim().toLowerCase(Locale.ROOT);
-        credentialsValid = raw.matches("[a-zA-Z]{4,}");
+        credentialsValid = raw.matches("[a-zA-Z]{1,4}");
     }
 
     @Then("ui test credentials should be {word}")
